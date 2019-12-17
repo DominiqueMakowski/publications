@@ -19,7 +19,7 @@ My research wordcloud, based on the most frequent words of my papers.
 
 | n\_publications | n\_citations | h\_index | i10\_index |
 | --------------: | -----------: | -------: | ---------: |
-|              22 |          141 |        7 |          7 |
+|              22 |          146 |        7 |          7 |
 
 ## Coauthors Network
 
@@ -37,6 +37,17 @@ accurate.
 *2019*
 
 </p>
+
+**Makowski, D.**, Sperduti, M., Lavallée, S., Nicolas, S., & Piolino, P.
+(2019). [Adaptation and Validation of a Short French Version of the
+Affective Style
+Questionnaire](https://dominiquemakowski.github.io/publication/makowski2019heart/makowski2019adaptation.pdf).
+*International Journal of Cognitive Therapy*, 1-13.
+
+**Makowski, D.**, Ben-Shachar, M. S., Chen, S. H., & Lüdecke, D. (2019).
+[Indices of Effect Existence and Significance in the Bayesian
+Framework](https://dominiquemakowski.github.io/publication/makowski2019heart/makowski2019indices.pdf).
+*Frontiers in Psychology, 10*, 2767.
 
 **Makowski, D.**, Sperduti, M., Blondé, P., Nicolas, S., & Piolino, P.
 (2019). [The heart of cognitive control: Cardiac phase modulates
@@ -170,10 +181,11 @@ paradox](https://dominiquemakowski.github.io/publication/makowski2015emotion/mak
 dissemination of academic work. They can be downloaded for noncommercial
 purposes. Copyright resides with the respective copyright holders as
 stated in each article. The files may not be reposted without permission
-from copyright holders.*</sub> <sup>*Disclaimer: This page is for
-personal friends only so people that will download the papers are my
-peers and friends. As a consequence, the papers are not shared with
-strangers.*</sub>
+from copyright holders.*</sub>
+
+<sup>*Disclaimer: This page is for personal friends only so people that
+will download the papers are my peers and friends. As a consequence, the
+papers are not shared with strangers.*</sub>
 
 ### General Audience / Media Coverage
 

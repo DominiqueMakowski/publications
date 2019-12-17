@@ -207,6 +207,10 @@ p
 
 <p align="center">*2019*</p>
 
+**Makowski, D.**, Sperduti, M., Lavallée, S., Nicolas, S., & Piolino, P. (2019). [Adaptation and Validation of a Short French Version of the Affective Style Questionnaire](https://dominiquemakowski.github.io/publication/makowski2019heart/makowski2019adaptation.pdf). *International Journal of Cognitive Therapy*, 1-13.
+
+**Makowski, D.**, Ben-Shachar, M. S., Chen, S. H., & Lüdecke, D. (2019). [Indices of Effect Existence and Significance in the Bayesian Framework](https://dominiquemakowski.github.io/publication/makowski2019heart/makowski2019indices.pdf). *Frontiers in Psychology, 10*, 2767.
+
 **Makowski, D.**, Sperduti, M., Blondé, P., Nicolas, S., & Piolino, P. (2019). [The heart of cognitive control: Cardiac phase modulates processing speed and inhibition](https://dominiquemakowski.github.io/publication/makowski2019heart/makowski2019heart.pdf). *Psychophysiology*, e13490.
 
 **Makowski, D.**, Ben-Shachar, M., & Lüdecke, D. (2019). [bayestestR: Describing effects and their uncertainty, existence and significance within the Bayesian framework](https://dominiquemakowski.github.io/publication/makowski2019bayestestr/makowski2019bayestestr.pdf). *Journal of Open Source Software*, 4(40), 1541.
@@ -252,6 +256,7 @@ Sperduti, M.\*, Arcangeli, M.\*, **Makowski, D.**, Wantzen, P., Zalla, T., Lemai
 **Makowski, D.**, Sperduti, M., Blanchet, S., Nicolas, S. & Piolino, P. (2015). [Régulation Emotionnelle face au Déclin Cognitif dans le Vieillissement : Un Faux Paradoxe ? | Emotion regulation and the cognitive decline in aging: beyond the paradox](https://dominiquemakowski.github.io/publication/makowski2015emotion/makowski2015emotion.pdf). *Gériatrie et Psychologie Neuropsychiatrie du Vieillissement*, 13(3), 301-8.
 
 <sup>*Note: Electronic versions are provided to ensure timely dissemination of academic work. They can be downloaded for noncommercial purposes. Copyright resides with the respective copyright holders as stated in each article. The files may not be reposted without permission from copyright holders.*</sub> 
+
 <sup>*Disclaimer: This page is for personal friends only so people that will download the papers are my peers and friends. As a consequence, the papers are not shared with strangers.*</sub> 
 
 
