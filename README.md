@@ -1,32 +1,45 @@
 
-# Makowski’s Stuff
+# Publications
 
-This repo might contain stuff related to my publications.
+  - [**Personal Website**](https://dominiquemakowski.github.io/)
+  - [**List of
+    Communications**](https://github.com/DominiqueMakowski/publications#communications)
+
+This repo contains materials related to my publications (such as data
+and analysis scripts) to facilitate reproducibility and sharing.
 
 ## Research
 
-My research wordcloud, based on the most frequent words of my papers.
+My research wordcloud, based on the most frequent words of my papers
+(done using R).
 
 <p align="center">
 
-<img src="img/unnamed-chunk-2-1.png" title="**My research wordcloud, based on the most frequent words of my papers (done using R).**" alt="**My research wordcloud, based on the most frequent words of my papers (done using R).**" style="display: block; margin: auto;" />
+<img src="img/wordcloud-1.png" style="display: block; margin: auto;" />
 
 </p>
 
-## Impact
+## Scientific Impact
 
-<img src="img/unnamed-chunk-3-1.png" title="**Cumulative citations and publication number, automatically scrapped from Google Scholar.**" alt="**Cumulative citations and publication number, automatically scrapped from Google Scholar.**" style="display: block; margin: auto;" />
+| Metric                 | Score |
+| :--------------------- | ----: |
+| Number of Publications |    22 |
+| Number of Citations    |   184 |
+| h-index                |     8 |
+| i10-index              |     8 |
 
-| n\_publications | n\_citations | h\_index | i10\_index |
-| --------------: | -----------: | -------: | ---------: |
-|              22 |          146 |        7 |          7 |
+Cumulative citations and publication number, automatically scrapped from
+Google Scholar:
 
-## Coauthors Network
+<img src="img/impact-1.png" style="display: block; margin: auto;" />
 
-The data is retrieved from the Google Scholar list, thus is not 100%
-accurate.
+## Collaboration Network
 
-<img src="img/unnamed-chunk-5-1.png" title="*Based on the Google Scholar list, thus not 100% accurate.*" alt="*Based on the Google Scholar list, thus not 100% accurate.*" style="display: block; margin: auto;" />
+The data is retrieved from the Google Scholar co-author list, thus not
+100% accurate (e.g., co-authors without a scholar profile are not
+listed).
+
+<img src="img/network-1.png" style="display: block; margin: auto;" />
 
 ## Communications
 

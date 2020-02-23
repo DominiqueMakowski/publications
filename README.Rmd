@@ -12,7 +12,7 @@ editor_options:
   chunk_output_type: console
 ---
 
-```{r, echo = FALSE}
+```{r, echo = FALSE, warning=FALSE, message=FALSE}
 knitr::opts_chunk$set(
   dpi = 600,
   collapse = TRUE,
@@ -23,25 +23,30 @@ options(
   digits = 4,
   width = 60
 )
+
+library(tidyverse)
 ```
 
 
 
 
 
-# Makowski's Stuff
+# Publications
 
-This repo might contain stuff related to my publications.
+- [**Personal Website**](https://dominiquemakowski.github.io/)
+- [**List of Communications**](https://github.com/DominiqueMakowski/publications#communications)
+
+This repo contains materials related to my publications (such as data and analysis scripts) to facilitate reproducibility and sharing.
+
 
 ## Research 
 
-My research wordcloud, based on the most frequent words of my papers.
+My research wordcloud, based on the most frequent words of my papers (done using R).
 
 <p align="center">
-```{r echo = FALSE, message=FALSE, warning=FALSE, fig.width=10, fig.align='center', fig.cap="**My research wordcloud, based on the most frequent words of my papers (done using R).**"}
+```{r wordcloud, echo = FALSE, message=FALSE, warning=FALSE, fig.width=10, fig.align='center'}
 library(ggwordcloud)
 library(pdftools)
-library(tidyverse)
 
 
 replace_and_add <- function(data, target, add_to, delete = T) {
@@ -94,7 +99,7 @@ data <- data.frame(word = rownames(as.matrix(text_clean)), freq = rowSums(as.mat
   dplyr::filter(freq < Inf) %>%
   dplyr::filter(length >= 4) %>%
   dplyr::select(-length) %>%
-  dplyr::filter(!word %in% c("dans", "plus", "pour", "avec", "cette", "comme", "sont", "tion", "also", "france", "nature", "lhrdit", "eect", "entre", "will", "leur", "mais", "thse", "deux", "elle", "lanne", "chez", "left", "deux")) %>%
+  dplyr::filter(!word %in% c("dans", "plus", "pour", "avec", "cette", "comme", "sont", "tion", "also", "france", "nature", "lhrdit", "eect", "entre", "will", "leur", "mais", "thse", "deux", "elle", "lanne", "chez", "left", "deux", "thus", "ainsi", "fait")) %>%
   mutate(word = stringi::stri_trans_general(word, "latin-ascii"))
 
 
@@ -111,7 +116,7 @@ data %>%
   ) %>%
   ggplot(aes(label = word, size = freq, color = word, angle = angle)) +
   scale_color_manual(values = colours) +
-  geom_text_wordcloud(
+  ggwordcloud::geom_text_wordcloud(
     grid_margin = 0.5,
     area_corr = TRUE,
     area_corr_power = 1,
@@ -124,15 +129,34 @@ data %>%
 </p>
 
 
-## Impact
+## Scientific Impact
 
-```{r echo=FALSE, message=FALSE, warning=FALSE, fig.width=10, fig.align='center', fig.cap="**Cumulative citations and publication number, automatically scrapped from Google Scholar.**"}
-library(tidyverse)
-library(ggplot2)
-library(plotly)
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.align='center'}
+stats <- scholar::get_profile("bg0BZ-QAAAAJ")
+n_pub <- scholar::get_num_articles("bg0BZ-QAAAAJ")
+n_cit <- sum(scholar::get_citation_history("bg0BZ-QAAAAJ")$cites)
+
+# Vertical
+knitr::kable(data.frame(
+  Metric = c("Number of Publications", "Number of Citations", "h-index", "i10-index"),
+  Score = c(n_pub, n_cit, stats$h_index, stats$h_index)
+))
+
+# # Horizontal
+# knitr::kable(data.frame(
+#   `Number of Publications` = n_pub,
+#   n_citations = n_cit,
+#   h_index = stats$h_index,
+#   i10_index = stats$h_index
+# ))
+```
+
+
+
+Cumulative citations and publication number, automatically scrapped from Google Scholar:
+
+```{r impact, echo=FALSE, message=FALSE, warning=FALSE, fig.width=10, fig.align='center'}
 library(scholar)
-library(webshot)
-
 
 
 stats <- scholar::get_publications("bg0BZ-QAAAAJ", flush = T) %>%
@@ -147,56 +171,84 @@ stats <- scholar::get_publications("bg0BZ-QAAAAJ", flush = T) %>%
     Citations = cumsum(Citations)
   ) %>%
   dplyr::rename(Year = year) %>%
-  tidyr::gather(Index, Number, -Year)
-
+  tidyr::gather(Index, Number, -Year) %>% 
+  dplyr::mutate(Index = fct_rev(Index))
 
 
 p <- stats %>%
   ggplot(aes(x = Year, y = Number, colour = Index)) +
-  geom_line(size = 1) +
-  theme_classic() +
+  geom_line(size = 2) +
+  see::theme_modern() +
   ylab("") +
   # scale_x_continuous(breaks = seq(min(stats$Year), max(stats$Year), by = 1)) +
-  scale_color_manual(values = c("#E91E63", "#2196F3")) +
-  facet_wrap(~Index, scales = "free", strip.position = "left") +
+  scale_color_manual(values = c("#2196F3", "#E91E63")) +
+  facet_wrap(~Index, scales = "free", strip.position = "top") +
   theme(
     strip.background = element_blank(),
     strip.placement = "outside",
     # strip.text.y = element_blank(),
-    strip.text = element_text(face = "bold", size = 10),
-    axis.title = element_text(face = "bold", size = 10),
+    strip.text = element_text(face = "plain", size = 16),
+    axis.title = element_text(face = "plain", size = 16),
+    axis.title.x = element_blank(),
     legend.position = "none"
   )
-# p
-# plotly::ggplotly(p)
 p
 ```
 
-```{r echo=FALSE, message=FALSE, warning=FALSE, fig.align='center'}
-stats <- scholar::get_profile("bg0BZ-QAAAAJ")
-n_pub <- scholar::get_num_articles("bg0BZ-QAAAAJ")
-n_cit <- sum(scholar::get_citation_history("bg0BZ-QAAAAJ")$cites)
-
-knitr::kable(data.frame(
-  n_publications = n_pub,
-  n_citations = n_cit,
-  h_index = stats$h_index,
-  i10_index = stats$h_index
-))
-```
 
 
 
-## Coauthors Network
+## Collaboration Network
 
-The data is retrieved from the Google Scholar list, thus is not 100% accurate.
+The data is retrieved from the Google Scholar co-author list, thus not 100% accurate (e.g., co-authors without a scholar profile are not listed).
 
-```{r echo=FALSE, message=FALSE, warning=FALSE, fig.height=13, fig.width=13, fig.align='center', include=TRUE, fig.cap="*Based on the Google Scholar list, thus not 100% accurate.*"}
-library(scholar)
+```{r network, echo=FALSE, message=FALSE, warning=FALSE, fig.height=10, fig.width=10, fig.align='center', include=TRUE}
+library(scholarnetwork)
+library(igraph)
+library(ggraph)
+library(tidygraph)
 
-coauthors <- scholar::get_coauthors("bg0BZ-QAAAAJ", n_coauthors=50, n_deep=1)
-p <- scholar::plot_coauthors(coauthors)
+# Scholar
+data <- scholar::get_coauthors("bg0BZ-QAAAAJ", n_coauthors=250, n_deep=1)
+
+d <- data %>% 
+  tidygraph::as_tbl_graph(directed=FALSE) %>%
+  filter(name != "") %>% 
+  mutate(closeness = tidygraph::centrality_closeness(normalized = TRUE),
+         degree = tidygraph::centrality_degree(normalized = TRUE),
+         betweeness = tidygraph::centrality_betweenness(normalized = TRUE)) %>%
+  tidygraph::activate(edges) %>%
+  mutate(importance = tidygraph::centrality_edge_betweenness(), 
+         group = as.factor(from)) %>% 
+  tidygraph::activate(nodes) %>%
+  mutate(group = as.factor(tidygraph::group_edge_betweenness())) %>% 
+  as.list()
+
+
+# scholarnetwork
+# d <- scholarnetwork::extractNetwork(id="bg0BZ-QAAAAJ", n=500)
+# 
+# d$nodes <- d$nodes %>%
+#   mutate(name = label,
+#          group = as.factor(group),
+#          closeness = degree)
+# 
+# d$edges <- d$edges %>%
+#   dplyr::filter(!grepl("D MAKOWSKI", node1) | !grepl("D MAKOWSKI", node2))
+
+
+
+# Plot
+p <- tidygraph::tbl_graph(nodes=d$nodes, edges=d$edges, directed=FALSE) %>% 
+  ggraph::ggraph(layout = 'fr') +
+  ggraph::geom_edge_arc(aes(alpha=importance), show.legend = FALSE, strength=0.1) +
+  ggraph::geom_node_point(aes(size = degree, colour=group), show.legend = FALSE) +
+  ggraph::geom_node_text(aes(label = name, size=degree), repel = TRUE, check_overlap = TRUE, show.legend = FALSE) +
+  ggraph::theme_graph() +
+  scale_size_continuous(range = c(2, 6)) +
+  see::scale_color_material_d(palette="rainbow", reverse=TRUE)
 p
+# ggsave("./img/network.png", p, height=10, width=10, dpi=600)
 ```
 
 
