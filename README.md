@@ -21,6 +21,8 @@ My research wordcloud, based on the most frequent words of my papers
 
 ## Scientific Impact
 
+  - *retrieved on 2020-02-23*
+
 | Metric                 | Score |
 | :--------------------- | ----: |
 | Number of Publications |    22 |
