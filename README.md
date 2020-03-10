@@ -19,14 +19,12 @@ My research wordcloud, based on the most frequent words of my papers
 
 </p>
 
-## Scientific Impact
-
-  - *retrieved on 2020-02-23*
+## Scientific Impact <sub>*(retrieved on 10 March 2020)*</sub>
 
 | Metric                 | Score |
 | :--------------------- | ----: |
 | Number of Publications |    22 |
-| Number of Citations    |   184 |
+| Number of Citations    |   188 |
 | h-index                |     8 |
 | i10-index              |     8 |
 

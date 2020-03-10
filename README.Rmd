@@ -129,9 +129,8 @@ data %>%
 </p>
 
 
-## Scientific Impact
+## Scientific Impact <sub>*(retrieved on `r format(Sys.time(), "%d %B %Y")`)*</sub>
 
-- *retrieved on `r Sys.Date()`*
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE, fig.align='center'}
 library(scholar)
