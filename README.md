@@ -19,12 +19,12 @@ My research wordcloud, based on the most frequent words of my papers
 
 </p>
 
-## Scientific Impact <sub>*(retrieved on 10 March 2020)*</sub>
+## Scientific Impact <sub>*(retrieved on 18 March 2020)*</sub>
 
 | Metric                 | Score |
 | :--------------------- | ----: |
-| Number of Publications |    22 |
-| Number of Citations    |   188 |
+| Number of Publications |    23 |
+| Number of Citations    |   194 |
 | h-index                |     8 |
 | i10-index              |     8 |
 
@@ -44,6 +44,17 @@ listed).
 ## Communications
 
 ### Publications
+
+<p align="center">
+
+*2020*
+
+</p>
+
+**Makowski, D.**, Pham, T., Lau Z. J., Leow D., Raine A., & Chen, S. H.
+*(under review)*. [The Structure of Deception: Validation of the Lying
+Profile
+Questionnaire](https://dominiquemakowski.github.io/publication/makowski2019heart/makowski2020structure.pdf).
 
 <p align="center">
 

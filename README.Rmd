@@ -207,6 +207,7 @@ The data is retrieved from the Google Scholar co-author list, thus not 100% accu
 
 ```{r network, echo=FALSE, message=FALSE, warning=FALSE, fig.height=10, fig.width=10, fig.align='center', include=TRUE}
 library(scholarnetwork)
+library(scholar)
 library(igraph)
 library(ggraph)
 library(tidygraph)
@@ -224,8 +225,12 @@ d <- data %>%
   mutate(importance = tidygraph::centrality_edge_betweenness(), 
          group = as.factor(from)) %>% 
   tidygraph::activate(nodes) %>%
-  mutate(group = as.factor(tidygraph::group_edge_betweenness())) %>% 
+  filter(!name %in% c("Sort By Citations", "Sort By Year", "Sort By Title")) %>% 
+  mutate(name = stringr::str_remove(name, ",.*"),
+         group = as.factor(tidygraph::group_edge_betweenness()),
+         group2 = as.factor(tidygraph::group_optimal())) %>% 
   as.list()
+
 
 
 # scholarnetwork
@@ -245,7 +250,7 @@ d <- data %>%
 p <- tidygraph::tbl_graph(nodes=d$nodes, edges=d$edges, directed=FALSE) %>% 
   ggraph::ggraph(layout = 'fr') +
   ggraph::geom_edge_arc(aes(alpha=importance), show.legend = FALSE, strength=0.1) +
-  ggraph::geom_node_point(aes(size = degree, colour=group), show.legend = FALSE) +
+  ggraph::geom_node_point(aes(size = degree, colour=group2), show.legend = FALSE) +
   ggraph::geom_node_text(aes(label = name, size=degree), repel = TRUE, check_overlap = TRUE, show.legend = FALSE) +
   ggraph::theme_graph() +
   scale_size_continuous(range = c(2, 6)) +
@@ -259,6 +264,10 @@ p
 ## Communications
 
 ### Publications
+
+<p align="center">*2020*</p>
+
+**Makowski, D.**, Pham, T., Lau Z. J., Leow D., Raine A., & Chen, S. H. *(under review)*. [The Structure of Deception: Validation of the Lying Profile Questionnaire](https://dominiquemakowski.github.io/publication/makowski2019heart/makowski2020structure.pdf).
 
 <p align="center">*2019*</p>
 
