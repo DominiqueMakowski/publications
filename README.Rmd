@@ -41,7 +41,7 @@ This repo contains materials related to my publications (such as data and analys
 
 ## Research 
 
-My research wordcloud, based on the most frequent words of my papers (done using R).
+My research wordcloud, based on the most frequent words present in my papers:
 
 <p align="center">
 ```{r wordcloud, echo = FALSE, message=FALSE, warning=FALSE, fig.width=10, fig.align='center'}

@@ -10,8 +10,8 @@ and analysis scripts) to facilitate reproducibility and sharing.
 
 ## Research
 
-My research wordcloud, based on the most frequent words of my papers
-(done using R).
+My research wordcloud, based on the most frequent words present in my
+papers:
 
 <p align="center">
 
@@ -19,12 +19,12 @@ My research wordcloud, based on the most frequent words of my papers
 
 </p>
 
-## Scientific Impact <sub>*(retrieved on 18 March 2020)*</sub>
+## Scientific Impact <sub>*(retrieved on 24 March 2020)*</sub>
 
 | Metric                 | Score |
 | :--------------------- | ----: |
-| Number of Publications |    23 |
-| Number of Citations    |   194 |
+| Number of Publications |    25 |
+| Number of Citations    |   206 |
 | h-index                |     8 |
 | i10-index              |     8 |
 
