@@ -203,51 +203,52 @@ p
 
 ## Collaboration Network
 
-The data is retrieved from the Google Scholar co-author list, thus not 100% accurate (e.g., co-authors without a scholar profile are not listed).
+The data is retrieved from the Google Scholar co-author list (that one must update ***manually*** on its scholar profile by clicking the `+` button and accept the suggestions), thus not 100% accurate (e.g., co-authors without a scholar profile are not listed).
 
-```{r network, echo=FALSE, message=FALSE, warning=FALSE, fig.height=10, fig.width=10, fig.align='center', include=TRUE}
-library(scholarnetwork)
+```{r network, echo=FALSE, message=FALSE, warning=FALSE, fig.height=10*2, fig.width=10, fig.align='center', include=TRUE}
+library(tidyverse)
 library(scholar)
 library(igraph)
 library(ggraph)
 library(tidygraph)
+library(patchwork)
 
-# Scholar
-data <- scholar::get_coauthors("bg0BZ-QAAAAJ", n_coauthors=250, n_deep=1)
+# Create graph
+create_graph <- function(data){
+  data %>% 
+    tidygraph::as_tbl_graph(directed=FALSE) %>%
+    dplyr::filter(name != "") %>% 
+    dplyr::mutate(closeness = tidygraph::centrality_closeness(normalized = TRUE),
+           degree = tidygraph::centrality_degree(normalized = TRUE),
+           betweeness = tidygraph::centrality_betweenness(normalized = TRUE)) %>%
+    tidygraph::activate(edges) %>%
+    dplyr::mutate(importance = tidygraph::centrality_edge_betweenness(), 
+           group = as.factor(from)) %>% 
+    tidygraph::activate(nodes) %>%
+    dplyr::filter(!name %in% c("Sort By Citations", "Sort By Year", "Sort By Title")) %>% 
+    dplyr::mutate(name = stringr::str_remove(name, ",.*"),
+           group1 = as.factor(tidygraph::group_edge_betweenness()),
+           group2 = as.factor(tidygraph::group_optimal()),
+           group3 = as.factor(tidygraph::group_walktrap()),
+           group4 = as.factor(tidygraph::group_spinglass()),
+           group5 = as.factor(tidygraph::group_louvain())) %>% 
+    as.list()
+}
 
-d <- data %>% 
-  tidygraph::as_tbl_graph(directed=FALSE) %>%
-  filter(name != "") %>% 
-  mutate(closeness = tidygraph::centrality_closeness(normalized = TRUE),
-         degree = tidygraph::centrality_degree(normalized = TRUE),
-         betweeness = tidygraph::centrality_betweenness(normalized = TRUE)) %>%
-  tidygraph::activate(edges) %>%
-  mutate(importance = tidygraph::centrality_edge_betweenness(), 
-         group = as.factor(from)) %>% 
-  tidygraph::activate(nodes) %>%
-  filter(!name %in% c("Sort By Citations", "Sort By Year", "Sort By Title")) %>% 
-  mutate(name = stringr::str_remove(name, ",.*"),
-         group = as.factor(tidygraph::group_edge_betweenness()),
-         group2 = as.factor(tidygraph::group_optimal())) %>% 
-  as.list()
 
 
 
-# scholarnetwork
-# d <- scholarnetwork::extractNetwork(id="bg0BZ-QAAAAJ", n=500)
-# 
-# d$nodes <- d$nodes %>%
-#   mutate(name = label,
-#          group = as.factor(group),
-#          closeness = degree)
-# 
-# d$edges <- d$edges %>%
-#   dplyr::filter(!grepl("D MAKOWSKI", node1) | !grepl("D MAKOWSKI", node2))
+
+
+# Scrap data from google scholar
+data <- scholar::get_coauthors("bg0BZ-QAAAAJ", n_coauthors=1000, n_deep=1)
+
 
 
 
 # Plot
-p <- tidygraph::tbl_graph(nodes=d$nodes, edges=d$edges, directed=FALSE) %>% 
+d <- create_graph(data)
+p_semi <- tidygraph::tbl_graph(nodes=d$nodes, edges=d$edges, directed=FALSE) %>% 
   ggraph::ggraph(layout = 'fr') +
   ggraph::geom_edge_arc(aes(alpha=importance), show.legend = FALSE, strength=0.1) +
   ggraph::geom_node_point(aes(size = degree, colour=group2), show.legend = FALSE) +
@@ -255,7 +256,41 @@ p <- tidygraph::tbl_graph(nodes=d$nodes, edges=d$edges, directed=FALSE) %>%
   ggraph::theme_graph() +
   scale_size_continuous(range = c(2, 6)) +
   see::scale_color_material_d(palette="rainbow", reverse=TRUE)
-p
+
+# Simplify
+direct_connections <- data[data$author=="Dominique Makowski"|data$coauthors=="Dominique Makowski", ]
+direct_connections <- unique(data$author, data$coauthors)
+data_close <- dplyr::filter(data, coauthors %in% direct_connections, author %in% direct_connections)
+
+d <- create_graph(data_close)
+p_close <- tidygraph::tbl_graph(nodes=d$nodes, edges=d$edges, directed=FALSE) %>% 
+  ggraph::ggraph(layout = 'fr') +
+  ggraph::geom_edge_arc(aes(alpha=importance), show.legend = FALSE, strength=0.1) +
+  ggraph::geom_node_point(aes(size = degree, colour=group4), show.legend = FALSE) +
+  ggraph::geom_node_text(aes(label = name, size=degree), repel = TRUE, check_overlap = TRUE, show.legend = FALSE) +
+  ggraph::theme_graph() +
+  scale_size_continuous(range = c(2, 6)) +
+  see::scale_color_material_d(palette="rainbow", reverse=TRUE)
+
+
+
+p_semi / p_close
+
+
+# data <- scholar::get_coauthors("bg0BZ-QAAAAJ", n_coauthors=1000, n_deep=2)
+# data[data$author %in% direct_connections | data$coauthors %in% direct_connections, ]
+# d <- create_graph(data)
+# p_large <- tidygraph::tbl_graph(nodes=d$nodes, edges=d$edges, directed=FALSE) %>% 
+#   ggraph::ggraph(layout = 'fr') +
+#   ggraph::geom_edge_arc(aes(alpha=importance), show.legend = FALSE, strength=0.1) +
+#   ggraph::geom_node_point(aes(size = degree, colour=group2), show.legend = FALSE) +
+#   ggraph::geom_node_text(aes(label = name, size=degree), repel = TRUE, check_overlap = TRUE, show.legend = FALSE) +
+#   ggraph::theme_graph() +
+#   scale_size_continuous(range = c(2, 6)) +
+#   see::scale_color_material_d(palette="rainbow", reverse=TRUE)
+# 
+# p_close / p_semi / p_large
+# 
 # ggsave("./img/network.png", p, height=10, width=10, dpi=600)
 ```
 

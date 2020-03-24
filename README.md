@@ -19,7 +19,7 @@ papers:
 
 </p>
 
-## Scientific Impact <sub>*(retrieved on 24 March 2020)*</sub>
+## Scientific Impact <sub>*(retrieved on 25 March 2020)*</sub>
 
 | Metric                 | Score |
 | :--------------------- | ----: |
@@ -35,9 +35,10 @@ Google Scholar:
 
 ## Collaboration Network
 
-The data is retrieved from the Google Scholar co-author list, thus not
-100% accurate (e.g., co-authors without a scholar profile are not
-listed).
+The data is retrieved from the Google Scholar co-author list (that one
+must update ***manually*** on its scholar profile by clicking the `+`
+button and accept the suggestions), thus not 100% accurate (e.g.,
+co-authors without a scholar profile are not listed).
 
 <img src="img/network-1.png" style="display: block; margin: auto;" />
 
