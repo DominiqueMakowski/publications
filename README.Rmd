@@ -14,7 +14,7 @@ editor_options:
 
 ```{r, echo = FALSE, warning=FALSE, message=FALSE}
 knitr::opts_chunk$set(
-  dpi = 600,
+  dpi = 450,
   collapse = TRUE,
   fig.path = "img/"
 )
@@ -31,12 +31,13 @@ library(tidyverse)
 
 
 
-# Publications
+# Makowski's Publications
+
+This repo contains materials and data related to my publications.
 
 - [**Personal Website**](https://dominiquemakowski.github.io/)
 - [**List of Communications**](https://github.com/DominiqueMakowski/publications#communications)
 
-This repo contains materials related to my publications (such as data and analysis scripts) to facilitate reproducibility and sharing.
 
 
 ## Research 
@@ -205,6 +206,57 @@ p
 
 The data is retrieved from the Google Scholar co-author list (that one must update ***manually*** on its scholar profile by clicking the `+` button and accept the suggestions), thus not 100% accurate (e.g., co-authors without a scholar profile are not listed).
 
+```{r convenience_function, message=FALSE, warning=FALSE, include=FALSE}
+library(scholar)
+
+
+find_coauthors <- function(id){
+  df <- scholar:::list_coauthors(id, Inf)
+  df$id <- scholar:::grab_id(df$coauthors_url)
+  df[c("author", "coauthors", "id")]
+}
+  
+
+list_coauthors <- function(df, sleep=0, silent=FALSE){
+  data <- data.frame()
+  
+  for(i in 1:nrow(df)){
+    
+    if(silent==FALSE){
+      print(paste0(round(i/nrow(df)*100, 2), "%"))
+    }
+    
+    Sys.sleep(1)
+    
+    if(!df$coauthors[i] %in% unique(df$author)){
+      data <- rbind(data, find_coauthors(df$id[i]))
+    }
+  }
+  
+  data
+}
+  
+  
+get_coauthors <- function(id="bg0BZ-QAAAAJ", n_deep = 1, silent=FALSE) {
+  stopifnot(is.numeric(n_deep), length(n_deep) >= 1, n_deep != 0)
+  stopifnot(is.numeric(n_coauthors), length(n_coauthors) >= 1, n_coauthors != 0)
+  
+  df <- find_coauthors(id)
+  if(n_deep > 0){
+    for(level in 1:n_deep){
+      df <- rbind(df, list_coauthors(df, sleep=2, silent=silent))
+    }
+  }
+  
+  df$author <- stringr::str_to_title(df$author)
+  df$coauthors <- stringr::str_to_title(df$coauthors)
+  df <- df[!df$author %in% c("Sort By Citations", "Sort By Year", "Sort By Title"),]
+  df <- df[!df$coauthors %in% c("Sort By Citations", "Sort By Year", "Sort By Title"),]
+  df[c("author", "coauthors")]
+}
+```
+
+
 ```{r network, echo=FALSE, message=FALSE, warning=FALSE, fig.height=10*2, fig.width=10, fig.align='center', include=TRUE}
 library(tidyverse)
 library(scholar)
@@ -272,8 +324,6 @@ p_close <- tidygraph::tbl_graph(nodes=d$nodes, edges=d$edges, directed=FALSE) %>
   scale_size_continuous(range = c(2, 6)) +
   see::scale_color_material_d(palette="rainbow", reverse=TRUE)
 
-
-
 p_semi / p_close
 
 
@@ -292,7 +342,15 @@ p_semi / p_close
 # p_close / p_semi / p_large
 # 
 # ggsave("./img/network.png", p, height=10, width=10, dpi=600)
+
+
+
+
 ```
+
+
+
+
 
 
 
@@ -302,13 +360,16 @@ p_semi / p_close
 
 <p align="center">*2020*</p>
 
-**Makowski, D.**, Pham, T., Lau Z. J., Leow D., Raine A., & Chen, S. H. *(under review)*. [The Structure of Deception: Validation of the Lying Profile Questionnaire](https://dominiquemakowski.github.io/publication/makowski2019heart/makowski2020structure.pdf).
+**Makowski, D.**, Pham, T., Lau Z. J., Leow D., Raine A., & Chen, S. H. *(under review)*. [The Structure of Deception: Validation of the Lying Profile Questionnaire](https://dominiquemakowski.github.io/publication/makowski2020structure/makowski2020structure.pdf).
+
+Girardeau, J. C., Blondé, P., **Makowski D.**, Abram, M., Piolino, P., & Sperduti, M. (2020). [The impact of state and dispositional mindfulness on prospective memory: A virtual reality study](https://dominiquemakowski.github.io/publication/girardeau2020impact/girardeau2020impact.pdf). *Consciousness and Cognition, 81*, 102920.
+
 
 <p align="center">*2019*</p>
 
-**Makowski, D.**, Sperduti, M., Lavallée, S., Nicolas, S., & Piolino, P. (2019). [Adaptation and Validation of a Short French Version of the Affective Style Questionnaire](https://dominiquemakowski.github.io/publication/makowski2019heart/makowski2019adaptation.pdf). *International Journal of Cognitive Therapy*, 1-13.
+**Makowski, D.**, Sperduti, M., Lavallée, S., Nicolas, S., & Piolino, P. (2019). [Adaptation and Validation of a Short French Version of the Affective Style Questionnaire](https://dominiquemakowski.github.io/publication/makowski2019adaptation/makowski2019adaptation.pdf). *International Journal of Cognitive Therapy*, 1-13.
 
-**Makowski, D.**, Ben-Shachar, M. S., Chen, S. H., & Lüdecke, D. (2019). [Indices of Effect Existence and Significance in the Bayesian Framework](https://dominiquemakowski.github.io/publication/makowski2019heart/makowski2019indices.pdf). *Frontiers in Psychology, 10*, 2767.
+**Makowski, D.**, Ben-Shachar, M. S., Chen, S. H., & Lüdecke, D. (2019). [Indices of Effect Existence and Significance in the Bayesian Framework](https://dominiquemakowski.github.io/publication/makowski2019indices/makowski2019indices.pdf). *Frontiers in Psychology, 10*, 2767.
 
 **Makowski, D.**, Sperduti, M., Blondé, P., Nicolas, S., & Piolino, P. (2019). [The heart of cognitive control: Cardiac phase modulates processing speed and inhibition](https://dominiquemakowski.github.io/publication/makowski2019heart/makowski2019heart.pdf). *Psychophysiology*, e13490.
 

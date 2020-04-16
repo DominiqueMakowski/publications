@@ -1,12 +1,11 @@
 
-# Publications
+# Makowski’s Publications
+
+This repo contains materials and data related to my publications.
 
   - [**Personal Website**](https://dominiquemakowski.github.io/)
   - [**List of
     Communications**](https://github.com/DominiqueMakowski/publications#communications)
-
-This repo contains materials related to my publications (such as data
-and analysis scripts) to facilitate reproducibility and sharing.
 
 ## Research
 
@@ -19,12 +18,12 @@ papers:
 
 </p>
 
-## Scientific Impact <sub>*(retrieved on 25 March 2020)*</sub>
+## Scientific Impact <sub>*(retrieved on 16 April 2020)*</sub>
 
 | Metric                 | Score |
 | :--------------------- | ----: |
 | Number of Publications |    25 |
-| Number of Citations    |   206 |
+| Number of Citations    |   211 |
 | h-index                |     8 |
 | i10-index              |     8 |
 
@@ -55,7 +54,13 @@ co-authors without a scholar profile are not listed).
 **Makowski, D.**, Pham, T., Lau Z. J., Leow D., Raine A., & Chen, S. H.
 *(under review)*. [The Structure of Deception: Validation of the Lying
 Profile
-Questionnaire](https://dominiquemakowski.github.io/publication/makowski2019heart/makowski2020structure.pdf).
+Questionnaire](https://dominiquemakowski.github.io/publication/makowski2020structure/makowski2020structure.pdf).
+
+Girardeau, J. C., Blondé, P., **Makowski D.**, Abram, M., Piolino, P., &
+Sperduti, M. (2020). [The impact of state and dispositional mindfulness
+on prospective memory: A virtual reality
+study](https://dominiquemakowski.github.io/publication/girardeau2020impact/girardeau2020impact.pdf).
+*Consciousness and Cognition, 81*, 102920.
 
 <p align="center">
 
@@ -66,12 +71,12 @@ Questionnaire](https://dominiquemakowski.github.io/publication/makowski2019heart
 **Makowski, D.**, Sperduti, M., Lavallée, S., Nicolas, S., & Piolino, P.
 (2019). [Adaptation and Validation of a Short French Version of the
 Affective Style
-Questionnaire](https://dominiquemakowski.github.io/publication/makowski2019heart/makowski2019adaptation.pdf).
+Questionnaire](https://dominiquemakowski.github.io/publication/makowski2019adaptation/makowski2019adaptation.pdf).
 *International Journal of Cognitive Therapy*, 1-13.
 
 **Makowski, D.**, Ben-Shachar, M. S., Chen, S. H., & Lüdecke, D. (2019).
 [Indices of Effect Existence and Significance in the Bayesian
-Framework](https://dominiquemakowski.github.io/publication/makowski2019heart/makowski2019indices.pdf).
+Framework](https://dominiquemakowski.github.io/publication/makowski2019indices/makowski2019indices.pdf).
 *Frontiers in Psychology, 10*, 2767.
 
 **Makowski, D.**, Sperduti, M., Blondé, P., Nicolas, S., & Piolino, P.
